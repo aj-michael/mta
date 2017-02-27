@@ -80,9 +80,14 @@ public final class Main {
         System.out.println(minutesTilNextTrains);
         PrintWriter printWriter = null;
         try {
-          printWriter = new PrintWriter(new FileWriter(fifoFile, true));
-          printWriter.print(
-              String.format("%d,%d", minutesTilNextTrains.get(0), minutesTilNextTrains.get(1)));
+          if (minutesTilNextTrains.size() >= 2) {
+            printWriter = new PrintWriter(new FileWriter(fifoFile, true));
+            printWriter.print(
+                String.format("%d,%d", minutesTilNextTrains.get(0), minutesTilNextTrains.get(1)));
+          } else {
+            System.err.println(
+                String.format("Only received %d next train times", minutesTilNextTrains.size()));
+          }
         } catch (IOException e) {
           e.printStackTrace();
         } finally {
