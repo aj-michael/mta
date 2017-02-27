@@ -3,6 +3,9 @@ package net.ajmichael.mta;
 import com.google.transit.realtime.GtfsRealtime;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
@@ -22,8 +25,9 @@ public final class Main {
   private static final String CONFIG_FILE = "config.properties";
   private static final String MANHATTAN_BOUND_BEDFORD = "L06N";
   private static final URL L_TRAIN_FEED_URL;
-  private static final long TIMER_DELAY_MILLIS = 1000;
-  private static final long TIMER_PERIOD_MILLIS = 5000;
+  private static final long TIMER_DELAY_MILLIS = 3000;
+  private static final long TIMER_PERIOD_MILLIS = 10000;
+  private static final File fifoFile = new File("/tmp/mtafifo");
 
   static {
     ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
@@ -74,6 +78,18 @@ public final class Main {
                 .collect(Collectors.toList());
         System.out.println("Next L trains at Bedford Ave");
         System.out.println(minutesTilNextTrains);
+        PrintWriter printWriter = null;
+        try {
+          printWriter = new PrintWriter(new FileWriter(fifoFile, true));
+          printWriter.print(
+              String.format("%d,%d", minutesTilNextTrains.get(0), minutesTilNextTrains.get(1)));
+        } catch (IOException e) {
+          e.printStackTrace();
+        } finally {
+          if (printWriter != null) {
+            printWriter.close();
+          }
+        }
       } catch (IOException e) {
         e.printStackTrace();
       }
