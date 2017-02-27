@@ -2,6 +2,8 @@ A Java program that fetches statuses for Manhattan-bound L trains arriving at
 Bedford Avenue and a C++ program that displays the train times on a 64x32 RGB
 LED matrix. Intended to be run on Raspberry Pi 2.0.
 
+![Demo photo](https://raw.githubusercontent.com/aj-michael/mta/master/img/demo.jpg)
+
 ## Setup
 
 Add your MTA API key to `config.properties` and run `mkfifo /tmp/mtafifo`.
