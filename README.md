@@ -19,3 +19,7 @@ bazel run //java/net/ajmichael/mta
 ```
 cd client && make && sudo ./mta
 ```
+
+## License
+
+GPLv2

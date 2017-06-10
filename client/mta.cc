@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
   RGBMatrix *canvas = CreateMatrixFromFlags(&argc, &argv, &defaults);
   if (canvas == NULL)
     return 1;
-  canvas->SetBrightness(50);
+  canvas->SetBrightness(30);
 
   signal(SIGTERM, InterruptHandler);
   signal(SIGINT, InterruptHandler);
