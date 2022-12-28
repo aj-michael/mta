@@ -7,7 +7,11 @@ java_binary(
 
 java_library(
     name = "lib",
-    srcs = ["LTrainLookup.java"],
+    srcs = [
+        "ApiMtaInfoLookup.java",
+        "DatamineLookup.java",
+        "LTrainLookup.java"
+    ],
     deps = ["//third_party/java/com/google/transit/realtime:gtfs_realtime"],
     resources = ["//:config.properties"],
 )

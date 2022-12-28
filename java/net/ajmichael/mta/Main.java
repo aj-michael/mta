@@ -30,8 +30,9 @@ public final class Main {
     @Override
     public void run() {
       try {
-
-        List<Long> minutesTilNextTrains = new LTrainLookup(MANHATTAN_BOUND_BEDFORD).nextTrains();
+        //LTrainLookup lookup = new DatamineLookup(MANHATTAN_BOUND_BEDFORD);
+        LTrainLookup lookup = new ApiMtaInfoLookup(MANHATTAN_BOUND_BEDFORD);
+        List<Long> minutesTilNextTrains = lookup.nextTrains();
         System.out.println("Next L trains at Bedford Ave");
         System.out.println(minutesTilNextTrains);
         PrintWriter printWriter = null;
